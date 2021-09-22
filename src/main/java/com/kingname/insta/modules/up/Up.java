@@ -1,6 +1,6 @@
 package com.kingname.insta.modules.up;
 
-import com.kingname.insta.modules.user.User;
+import com.kingname.insta.modules.user.Account;
 import com.kingname.insta.modules.post.Post;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
@@ -22,8 +22,8 @@ public class Up {
 
     @Nonnull
     @GraphQLQuery(name = "user")
-    @OneToOne(targetEntity = User.class)
-    private User user;
+    @OneToOne(targetEntity = Account.class)
+    private Account account;
 
     @Nonnull
     @GraphQLQuery(name = "post")

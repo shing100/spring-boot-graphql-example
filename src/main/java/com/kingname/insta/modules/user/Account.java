@@ -4,6 +4,7 @@ import com.kingname.insta.modules.comment.Comment;
 import com.kingname.insta.modules.up.Up;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
+import org.checkerframework.common.value.qual.MinLen;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
 @Builder @AllArgsConstructor @NoArgsConstructor @ToString
-public class User {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +25,11 @@ public class User {
     @Nonnull
     @GraphQLQuery(name = "username")
     private String username;
+
+    @Nonnull
+    @MinLen(value = 10)
+    @GraphQLQuery(name = "password")
+    private String password;
 
     @Nonnull
     @Column(unique = true, nullable = false)
@@ -52,9 +58,9 @@ public class User {
 
     @GraphQLQuery(name = "following")
     @ManyToMany
-    private List<User> following;
+    private List<Account> following;
 
     @GraphQLQuery(name = "followers")
     @ManyToMany
-    private List<User> followers;
+    private List<Account> followers;
 }

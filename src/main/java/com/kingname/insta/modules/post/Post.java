@@ -3,7 +3,7 @@ package com.kingname.insta.modules.post;
 import com.kingname.insta.modules.comment.Comment;
 import com.kingname.insta.modules.file.File;
 import com.kingname.insta.modules.up.Up;
-import com.kingname.insta.modules.user.User;
+import com.kingname.insta.modules.user.Account;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 
@@ -31,8 +31,8 @@ public class Post {
 
     @Nonnull
     @GraphQLQuery(name = "user")
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User user;
+    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
+    private Account account;
 
     @GraphQLQuery(name = "files")
     @ManyToMany(targetEntity = File.class, fetch = FetchType.LAZY)
