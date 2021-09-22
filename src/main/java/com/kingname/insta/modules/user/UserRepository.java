@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface AccountRepository extends JpaRepository<Account, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Account findByEmail(String email);
+    User findByEmail(String email);
 
-    Account findByUsername(String username);
+    User findByUsername(String username);
 }

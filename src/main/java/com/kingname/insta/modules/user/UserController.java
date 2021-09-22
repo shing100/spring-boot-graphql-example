@@ -17,43 +17,42 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class AccountController {
+public class UserController {
 
-    private final AccountService accountService;
-    private final AccountRepository accountRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
     private final Generator generator;
     private final PasswordEncoder passwordEncoder;
 
     @GraphQLQuery(name = "getAllUser", description = "테스트용")
-    public List<Account> getAllUser() {
-        return accountRepository.findAll();
+    public List<User> getAllUser() {
+        return userRepository.findAll();
     }
 
     @GraphQLMutation(name = "createAccount")
-    public Account createAccount(Account account) {
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        return accountRepository.save(account);
+    public User createAccount(User user) {
+        return userRepository.save(user);
     }
 
     @GraphQLMutation(name = "requestSecret")
     public Boolean requestSecret(String email) {
-        Account account = accountRepository.findByEmail(email);
-        if (account == null) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
             return false;
         }
-        account.setLoginSecret(generator.secretGenerator());
-        Account saveAccount = accountRepository.save(account);
-        return accountService.sendSecretMail(saveAccount.getEmail(), saveAccount.getLoginSecret());
+        user.setLoginSecret(generator.secretGenerator());
+        User saveUser = userRepository.save(user);
+        return userService.sendSecretMail(saveUser.getEmail(), saveUser.getLoginSecret());
     }
 
     @GraphQLMutation(name = "confirmSecret")
-    public Account confirmSecret(String secret, String email) {
-        Account account = accountRepository.findByEmail(email);
-        if (account == null) {
+    public User confirmSecret(String secret, String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
             throw new IllegalArgumentException("유효하지 않은 이메일입니다.");
         }
         
-        if (!secret.equals(account.getLoginSecret())) {
+        if (!secret.equals(user.getLoginSecret())) {
             throw new IllegalArgumentException("시크릿코드가 다릅니다.");
         }
         // token 발급

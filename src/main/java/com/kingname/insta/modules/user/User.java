@@ -15,7 +15,7 @@ import java.util.List;
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
 @Builder @AllArgsConstructor @NoArgsConstructor @ToString
-public class Account {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,9 +58,9 @@ public class Account {
 
     @GraphQLQuery(name = "following")
     @ManyToMany
-    private List<Account> following;
+    private List<User> following;
 
     @GraphQLQuery(name = "followers")
     @ManyToMany
-    private List<Account> followers;
+    private List<User> followers;
 }

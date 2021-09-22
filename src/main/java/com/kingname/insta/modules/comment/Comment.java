@@ -1,7 +1,7 @@
 package com.kingname.insta.modules.comment;
 
 import com.kingname.insta.modules.post.Post;
-import com.kingname.insta.modules.user.Account;
+import com.kingname.insta.modules.user.User;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +27,8 @@ public class Comment {
 
     @Nonnull
     @GraphQLQuery(name = "user")
-    @ManyToOne(targetEntity = Account.class, fetch = FetchType.LAZY)
-    private Account account;
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    private User user;
 
     @Nonnull
     @GraphQLQuery(name = "post")
