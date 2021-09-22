@@ -39,8 +39,8 @@ public class User {
     @GraphQLQuery(name = "bio")
     private String bio;
 
-    @GraphQLQuery(name = "password")
-    private String password;
+    @GraphQLQuery(name = "loginSecret")
+    private String loginSecret;
 
     @GraphQLQuery(name = "comments")
     @ManyToMany

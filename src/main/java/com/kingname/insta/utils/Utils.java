@@ -12,15 +12,15 @@ import java.util.List;
 @Component
 public class Utils {
 
-    public List<String> adjectives;
-    public List<String> nouns;
+    private List<String> adjectives;
+    private List<String> nouns;
 
     @PostConstruct
     public void loadWordList() throws IOException {
         ClassPathResource resource = new ClassPathResource("adjectives.txt");
-        adjectives.addAll(Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8));
+        adjectives = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
         resource = new ClassPathResource("nouns.txt");
-        nouns.addAll(Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8));
+        nouns = Files.readAllLines(resource.getFile().toPath(), StandardCharsets.UTF_8);
     }
 
     public String secretGenerator() {
