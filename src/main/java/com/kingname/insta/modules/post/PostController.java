@@ -3,13 +3,13 @@ package com.kingname.insta.modules.post;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
 
 @GraphQLApi
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class PostController {
 

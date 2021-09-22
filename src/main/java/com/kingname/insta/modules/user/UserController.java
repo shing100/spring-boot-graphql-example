@@ -6,7 +6,6 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
     private final UserRepository userRepository;
     private final Generator generator;
 
@@ -40,6 +40,6 @@ public class UserController {
         account.setLoginSecret(loginSecret);
         User saveAccount = userRepository.save(account);
         log.info(saveAccount.getLoginSecret());
-        return true;
+        return userService.sendSecretMail(saveAccount.getEmail(), saveAccount.getLoginSecret());
     }
 }
