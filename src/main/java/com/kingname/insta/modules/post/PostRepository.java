@@ -1,4 +1,4 @@
-package com.kingname.insta.post;
+package com.kingname.insta.modules.post;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

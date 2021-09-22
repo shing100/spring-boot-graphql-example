@@ -1,4 +1,4 @@
-package com.kingname.insta.utils;
+package com.kingname.insta.modules.utils;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 @Component
-public class Utils {
+public class Generator {
 
     private List<String> adjectives;
     private List<String> nouns;

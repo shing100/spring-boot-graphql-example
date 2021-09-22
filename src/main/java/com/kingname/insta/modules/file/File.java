@@ -1,7 +1,6 @@
-package com.kingname.insta.comment;
+package com.kingname.insta.modules.file;
 
-import com.kingname.insta.post.Post;
-import com.kingname.insta.user.User;
+import com.kingname.insta.modules.post.Post;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @ToString
-public class Comment {
+public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,17 +21,11 @@ public class Comment {
     private Long id;
 
     @Nonnull
-    @GraphQLQuery(name = "text")
-    private String text;
-
-    @Nonnull
-    @GraphQLQuery(name = "user")
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
-    private User user;
+    @GraphQLQuery(name = "url")
+    private String url;
 
     @Nonnull
     @GraphQLQuery(name = "post")
-    @ManyToOne(targetEntity = Post.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Post.class)
     private Post post;
-
 }

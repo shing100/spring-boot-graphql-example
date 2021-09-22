@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '11.1.0'
     implementation group: 'io.leangen.graphql', name: 'graphql-spqr-spring-boot-starter', version: '0.0.6'
@@ -31,6 +33,7 @@ dependencies {
     runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.200'
 
     implementation 'com.google.guava:guava:26.0-jre'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.4.4'
 
     testImplementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter-test', version: '11.1.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

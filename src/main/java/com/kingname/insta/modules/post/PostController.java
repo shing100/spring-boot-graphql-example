@@ -1,21 +1,17 @@
-package com.kingname.insta.post;
+package com.kingname.insta.modules.post;
 
-import com.kingname.insta.post.Post;
-import com.kingname.insta.post.PostRepository;
-import io.leangen.graphql.annotations.GraphQLContext;
-import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 @GraphQLApi
+@Controller
 @RequiredArgsConstructor
-public class PostService {
+public class PostController {
 
     private final PostRepository postRepository;
 

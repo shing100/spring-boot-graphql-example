@@ -1,24 +1,26 @@
-package com.kingname.insta.user;
+package com.kingname.insta.modules.user;
 
-import com.kingname.insta.utils.Utils;
+import com.kingname.insta.modules.utils.Generator;
 import io.leangen.graphql.annotations.GraphQLMutation;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @Slf4j
-@Service
 @GraphQLApi
+@RestController
 @RequiredArgsConstructor
-public class UserService {
+public class UserController {
 
     private final UserRepository userRepository;
-    private final Utils utils;
+    private final Generator generator;
 
-    @GraphQLMutation(name = "getAllUser", description = "테스트용")
+    @GraphQLQuery(name = "getAllUser", description = "테스트용")
     public List<User> getAllUser() {
         return userRepository.findAll();
     }
@@ -34,7 +36,7 @@ public class UserService {
         if (account == null) {
             return false;
         }
-        String loginSecret = utils.secretGenerator();
+        String loginSecret = generator.secretGenerator();
         account.setLoginSecret(loginSecret);
         User saveAccount = userRepository.save(account);
         log.info(saveAccount.getLoginSecret());

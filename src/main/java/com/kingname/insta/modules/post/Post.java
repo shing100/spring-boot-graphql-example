@@ -1,9 +1,9 @@
-package com.kingname.insta.post;
+package com.kingname.insta.modules.post;
 
-import com.kingname.insta.comment.Comment;
-import com.kingname.insta.file.File;
-import com.kingname.insta.up.Up;
-import com.kingname.insta.user.User;
+import com.kingname.insta.modules.comment.Comment;
+import com.kingname.insta.modules.file.File;
+import com.kingname.insta.modules.up.Up;
+import com.kingname.insta.modules.user.User;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
 
