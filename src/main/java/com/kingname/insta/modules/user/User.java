@@ -26,10 +26,8 @@ public class User {
     @GraphQLQuery(name = "username")
     private String username;
 
-    @Nonnull
-    @MinLen(value = 10)
-    @GraphQLQuery(name = "password")
-    private String password;
+    @Enumerated(EnumType.STRING)
+    private Authority authority = Authority.ROLE_USER;
 
     @Nonnull
     @Column(unique = true, nullable = false)
