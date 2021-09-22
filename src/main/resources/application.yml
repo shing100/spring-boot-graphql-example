@@ -1,0 +1,33 @@
+graphql:
+  servlet:
+    # Sets if GraphQL servlet should be created and exposed. If not specified defaults to "true".
+    enabled: true
+    # Sets the path where GraphQL servlet will be exposed. If not specified defaults to "/graphql"
+    mapping: /graphql
+    cors-enabled: true
+    cors:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET, HEAD, POST
+    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+    exception-handlers-enabled: true
+    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+    # Sets if asynchronous operations are supported for GraphQL requests. If not specified defaults to true.
+    async-mode-enabled: true
+  spqr:
+    gui:
+      enabled: true
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:mariadb://192.168.0.102:3307/insta
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: insta
+    password: Kingname1!
+  jpa:
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update

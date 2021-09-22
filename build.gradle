@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.kingname'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '11.1.0'
+    implementation group: 'io.leangen.graphql', name: 'graphql-spqr-spring-boot-starter', version: '0.0.6'
+    implementation group: 'io.leangen.graphql', name: 'graphql-spqr-spring-boot-annotations', version: '0.0.6'
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.3.12.RELEASE'
+    runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+    implementation 'com.google.guava:guava:26.0-jre'
+
+    testImplementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter-test', version: '11.1.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client' // MariaDB
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+test {
+    useJUnitPlatform()
+}
