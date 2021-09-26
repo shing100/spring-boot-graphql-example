@@ -1,30 +1,36 @@
 package com.kingname.insta.infra.jwt;
 
 import lombok.RequiredArgsConstructor;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
+@Aspect
+@Component
 @RequiredArgsConstructor
-public class JWTFilter extends OncePerRequestFilter {
+public class JwtSecurityAspect {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String BEARER_PREFIX = "Bearer ";
+    public static final String BEARER_PREFIX = "bearer ";
 
-    private final JWTTokenProvider tokenProvider;
+    private final JwtTokenProvider tokenProvider;
 
     // 실제 필터링 로직은 doFilterInternal 에 들어감
     // JWT 토큰의 인증 정보를 현재 쓰레드의 SecurityContext 에 저장하는 역할 수행
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    @Before("@annotation(jwtTokenRequired)")
+    public void authenticateWithToken(JwtTokenRequired jwtTokenRequired) {
+        ServletRequestAttributes requestAttributes =
+                (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpServletRequest request = requestAttributes.getRequest();
 
+        System.out.println(request.getHeader(AUTHORIZATION_HEADER));
         // 1. Request Header 에서 토큰을 꺼냄
         String jwt = resolveToken(request);
 
@@ -34,8 +40,6 @@ public class JWTFilter extends OncePerRequestFilter {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
-        filterChain.doFilter(request, response);
     }
 
     // Request Header 에서 토큰 정보를 꺼내오기

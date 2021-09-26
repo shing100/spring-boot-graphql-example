@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor @Builder
-public class JWTToken {
+public class JwtToken {
 
     private String grantType;
     private String token;
