@@ -1,15 +1,12 @@
 package com.kingname.insta.modules.user;
 
-import com.kingname.insta.modules.comment.Comment;
-import com.kingname.insta.modules.up.Up;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
-import org.checkerframework.common.value.qual.MinLen;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 @Getter @Setter
@@ -46,19 +43,11 @@ public class User {
     @GraphQLQuery(name = "loginSecret")
     private String loginSecret;
 
-    @GraphQLQuery(name = "comments")
-    @ManyToMany
-    private List<Comment> comments;
-
-    @GraphQLQuery(name = "likes")
-    @ManyToMany
-    private List<Up> ups;
-
     @GraphQLQuery(name = "following")
     @ManyToMany
-    private List<User> following;
+    private List<User> following = new ArrayList<>();
 
     @GraphQLQuery(name = "followers")
     @ManyToMany
-    private List<User> followers;
+    private List<User> followers  = new ArrayList<>();
 }

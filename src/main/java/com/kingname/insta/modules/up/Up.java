@@ -22,11 +22,11 @@ public class Up {
 
     @Nonnull
     @GraphQLQuery(name = "user")
-    @OneToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class)
     private User user;
 
     @Nonnull
     @GraphQLQuery(name = "post")
-    @OneToOne(targetEntity = Post.class)
+    @ManyToOne(targetEntity = Post.class)
     private Post post;
 }

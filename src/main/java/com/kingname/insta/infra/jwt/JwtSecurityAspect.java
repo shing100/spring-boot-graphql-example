@@ -30,7 +30,6 @@ public class JwtSecurityAspect {
                 (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
 
-        System.out.println(request.getHeader(AUTHORIZATION_HEADER));
         // 1. Request Header 에서 토큰을 꺼냄
         String jwt = resolveToken(request);
 

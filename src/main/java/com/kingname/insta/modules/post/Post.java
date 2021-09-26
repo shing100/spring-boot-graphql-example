@@ -29,7 +29,6 @@ public class Post {
     @GraphQLQuery(name = "caption")
     private String caption;
 
-    @Nonnull
     @GraphQLQuery(name = "user")
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     private User user;
@@ -37,12 +36,4 @@ public class Post {
     @GraphQLQuery(name = "files")
     @ManyToMany(targetEntity = File.class, fetch = FetchType.LAZY)
     private List<File> files;
-
-    @GraphQLQuery(name = "likes")
-    @OneToMany(targetEntity = Up.class, fetch = FetchType.LAZY)
-    private List<Up> ups;
-
-    @GraphQLQuery(name = "comments")
-    @ManyToMany(targetEntity = Comment.class, fetch = FetchType.LAZY)
-    private List<Comment> comments;
 }

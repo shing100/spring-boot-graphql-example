@@ -1,5 +1,10 @@
 package com.kingname.insta.modules.post;
 
+import com.kingname.insta.infra.jwt.JwtTokenRequired;
+import com.kingname.insta.modules.user.User;
+import com.kingname.insta.modules.user.UserRepository;
+import com.kingname.insta.modules.utils.SecurityUtil;
+import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +19,16 @@ import java.util.Optional;
 public class PostController {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
+
+    @JwtTokenRequired
+    @GraphQLMutation(name = "createPost")
+    public Post createPost(Post post) {
+        String email = SecurityUtil.getCurrentUserEmail();
+        User user = userRepository.findByEmail(email);
+        post.setUser(user);
+        return postRepository.save(post);
+    }
 
     @GraphQLQuery(name = "posts")
     public List<Post> getPosts(){

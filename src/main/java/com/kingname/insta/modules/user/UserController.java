@@ -2,7 +2,12 @@ package com.kingname.insta.modules.user;
 
 import com.kingname.insta.infra.jwt.JwtToken;
 import com.kingname.insta.infra.jwt.JwtTokenProvider;
+import com.kingname.insta.modules.post.Post;
+import com.kingname.insta.modules.post.PostRepository;
+import com.kingname.insta.modules.up.Up;
+import com.kingname.insta.modules.up.UpRepository;
 import com.kingname.insta.modules.utils.Generator;
+import io.leangen.graphql.annotations.GraphQLContext;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
@@ -23,6 +28,9 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final UpRepository upRepository;
+    private final PostRepository postRepository;
+
     private final Generator generator;
     private final JwtTokenProvider tokenProvider;
 
@@ -65,5 +73,15 @@ public class UserController {
         // token 발급
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, secret);
         return tokenProvider.generateTokenDto(authenticationToken);
+    }
+
+    @GraphQLQuery(name = "likes")
+    public List<Up> likes(@GraphQLContext User user) {
+        return upRepository.findAllByUser(user);
+    }
+
+    @GraphQLQuery(name = "posts")
+    public List<Post> posts(@GraphQLContext User user) {
+        return postRepository.findAllByUser(user);
     }
 }

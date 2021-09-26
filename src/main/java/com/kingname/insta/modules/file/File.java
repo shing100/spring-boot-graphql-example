@@ -1,18 +1,19 @@
 package com.kingname.insta.modules.file;
 
-import com.kingname.insta.modules.post.Post;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Entity
-@NoArgsConstructor
-@ToString
+@NoArgsConstructor @ToString
 public class File {
 
     @Id
@@ -23,9 +24,4 @@ public class File {
     @Nonnull
     @GraphQLQuery(name = "url")
     private String url;
-
-    @Nonnull
-    @GraphQLQuery(name = "post")
-    @ManyToOne(targetEntity = Post.class)
-    private Post post;
 }
