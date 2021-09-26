@@ -1,8 +1,7 @@
 package com.kingname.insta.modules.post;
 
-import com.kingname.insta.modules.comment.Comment;
 import com.kingname.insta.modules.file.File;
-import com.kingname.insta.modules.up.Up;
+import com.kingname.insta.modules.tag.Tag;
 import com.kingname.insta.modules.user.User;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.*;
@@ -28,6 +27,9 @@ public class Post {
     @Nonnull
     @GraphQLQuery(name = "caption")
     private String caption;
+
+    @ManyToMany
+    private List<Tag> tags;
 
     @GraphQLQuery(name = "user")
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
