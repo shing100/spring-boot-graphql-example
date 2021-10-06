@@ -1,8 +1,7 @@
 package com.kingname.insta.modules.tag;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity @ToString
+@AllArgsConstructor @NoArgsConstructor @Builder
 public class Tag {
 
     @Id
